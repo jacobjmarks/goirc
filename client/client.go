@@ -50,7 +50,11 @@ func (c *Client) handleInput() {
 
 func (c *Client) handleServerMessage() {
 	for {
-		message, _ := bufio.NewReader(c.conn).ReadString('\n')
+		message, err := bufio.NewReader(c.conn).ReadString('\n')
+
+		if err != nil {
+			log.Fatal("Server shutting down")
+		}
 
 		log.Print("Server sent: ", message)
 	}
