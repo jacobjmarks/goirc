@@ -41,7 +41,7 @@ func (c *Client) handleInput() {
 	for {
 		input, _ := reader.ReadString('\n')
 
-		_, err := (*c).conn.Write([]byte(input))
+		_, err := c.conn.Write([]byte(input))
 		if err != nil {
 			log.Printf("Error sending message to server: ", err.Error())
 		}
@@ -50,7 +50,7 @@ func (c *Client) handleInput() {
 
 func (c *Client) handleServerMessage() {
 	for {
-		message, _ := bufio.NewReader((*c).conn).ReadString('\n')
+		message, _ := bufio.NewReader(c.conn).ReadString('\n')
 
 		log.Print("Server sent: ", message)
 	}
